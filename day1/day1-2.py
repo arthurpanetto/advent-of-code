@@ -12,20 +12,27 @@ for linha in linhas:
     lista_esq.append(esq)  # Adicionar o valor à lista da esquerda
     lista_dir.append(dir)  # Adicionar o valor à lista da direita
 
-def total_distance(lista_esq, lista_dir):
-    # Ordena ambas as listas
+
+def similarity(lista_esq, lista_dir):
     lista_esq.sort()
     lista_dir.sort()
+    similarity_score = 0  # Variável para acumular o resultado final
+
+    # Para cada número da lista da esquerda
+    for num_esq in lista_esq:
+        count = 0  # Contador de ocorrências do número na lista direita
+        
+        # Contar quantas vezes o número aparece na lista da direita
+        for num_dir in lista_dir:
+            if num_esq == num_dir:
+                count += 1
+        
+        # Somar o produto do número e suas ocorrências na lista da direita
+        similarity_score += num_esq * count
     
-    # Soma das diferenças absolutas
-    aux = 0
-    for i in range(len(lista_esq)):
-        aux += abs(lista_esq[i] - lista_dir[i])
-    
-    return aux
+    return similarity_score
 
 
 # Calculando o resultado
-resultado = total_distance(lista_esq, lista_dir)
+resultado = similarity(lista_esq, lista_dir)
 print("Resultado:", resultado)
-
